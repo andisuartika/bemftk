@@ -18,7 +18,10 @@ class MahasiswaController extends Controller
     {
         $mahasiswa=Mahasiswa::all();
         $title="Mahasiswa";
-        return view('admin.mahasiswa', compact('title', 'mahasiswa'));
+        return view('admin.mahasiswa', [
+            'mahasiswa'=> Mahasiswa::latest()->paginate(5),
+        ], compact('title', 'mahasiswa')
+    );
     }
 
     /**

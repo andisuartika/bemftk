@@ -606,8 +606,8 @@ video {
 }
 .bg-purple-600 {
     --bg-opacity: 1;
-    background-color: #7e3af2;
-    background-color: rgba(126, 58, 242, var(--bg-opacity));
+    background-color: #21209c;
+    /* background-color: rgba(126, 58, 242, var(--bg-opacity)); */
 }
 .hover\:bg-gray-100:hover {
     --bg-opacity: 1;
@@ -616,8 +616,8 @@ video {
 }
 .hover\:bg-purple-700:hover {
     --bg-opacity: 1;
-    background-color: #6c2bd9;
-    background-color: rgba(108, 43, 217, var(--bg-opacity));
+    background-color: #3535eb;
+    /* background-color: rgba(108, 43, 217, var(--bg-opacity)); */
 }
 .focus\:bg-white:focus {
     --bg-opacity: 1;
@@ -629,8 +629,8 @@ video {
 }
 .active\:bg-purple-600:active {
     --bg-opacity: 1;
-    background-color: #7e3af2;
-    background-color: rgba(126, 58, 242, var(--bg-opacity));
+    background-color: #2121ec;
+    /* background-color: rgba(126, 58, 242, var(--bg-opacity)); */
 }
 .theme-dark .dark\:bg-gray-700 {
     --bg-opacity: 1;
@@ -725,8 +725,8 @@ video {
 }
 .border-purple-600 {
     --border-opacity: 1;
-    border-color: #7e3af2;
-    border-color: rgba(126, 58, 242, var(--border-opacity));
+    border-color: #3535eb;
+    /* border-color: rgba(126, 58, 242, var(--border-opacity)); */
 }
 .focus\:border-gray-500:focus {
     --border-opacity: 1;
@@ -750,8 +750,8 @@ video {
 }
 .focus\:border-purple-400:focus {
     --border-opacity: 1;
-    border-color: #ac94fa;
-    border-color: rgba(172, 148, 250, var(--border-opacity));
+    border-color: #4848f3;
+    /* border-color: rgba(172, 148, 250, var(--border-opacity)); */
 }
 .hover\:border-gray-500:hover {
     --border-opacity: 1;
@@ -1392,18 +1392,18 @@ video {
 }
 .text-purple-600 {
     --text-opacity: 1;
-    color: #7e3af2;
+    color: #3737c2;
     color: rgba(126, 58, 242, var(--text-opacity));
 }
 .focus-within\:text-purple-500:focus-within {
     --text-opacity: 1;
-    color: #9061f9;
-    color: rgba(144, 97, 249, var(--text-opacity));
+    color: #3737c2;
+    /* color: rgba(144, 97, 249, var(--text-opacity)); */
 }
 .focus-within\:text-purple-600:focus-within {
     --text-opacity: 1;
-    color: #7e3af2;
-    color: rgba(126, 58, 242, var(--text-opacity));
+    color: #3737c2;
+    /* color: rgba(126, 58, 242, var(--text-opacity)); */
 }
 .hover\:text-gray-700:hover {
     --text-opacity: 1;

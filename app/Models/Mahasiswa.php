@@ -13,12 +13,12 @@ class Mahasiswa extends Model
 
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class, 'id');
+        return $this->belongsTo(Prodi::class);
     }
 
     public function jurusan()
     {
-        return $this->belongsTo(Jurusan::class, 'id');
+        return $this->belongsTo(Jurusan::class);
     }
 
 
