@@ -35,6 +35,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middlewa
 
 Route::resource('/admin/mahasiswa', MahasiswaController::class);
 
+
 Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan')->middleware(['auth:sanctum', 'verified']);
 
 Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('validasi')->middleware(['auth:sanctum', 'verified']);

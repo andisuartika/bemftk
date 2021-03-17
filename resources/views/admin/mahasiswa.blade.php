@@ -23,6 +23,7 @@
                 <span>Hi, Welcome Admin</span>
               </div>
             </div>
+            @include('alert')
             <!-- Tambah Mahasiswa-->
             <div class="mb-8">
               <a href="{{ route('mahasiswa.create')}}">
@@ -60,7 +61,7 @@
                       <td class="px-4 py-3 text-md">{{$mhs->nama}}</td>
                       <td class="px-4 py-3 text-sm">{{ $mhs->jurusan()->get()->implode('nama')}}</td>
                       <td class="px-4 py-3 text-sm">{{ $mhs->prodi()->get()->implode('nama')}}</td>
-                      <td class="px-4 py-3 text-sm">Detail</td>
+                      <td class="px-4 py-3 text-sm"><a href="{{ route('mahasiswa.show', $mhs->id)}}">Detail</a></td>
                     </tr>
                     @endforeach                 
                   </tbody>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use BaconQrCode\Renderer\Path\Path;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -70,7 +71,11 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        $prodi = Prodi::get();
+        $jurusan = Jurusan::get();
+        $title="Detail Mahasiswa";
+        return view('admin.showMahasiswa', compact('title', 'mahasiswa','prodi','jurusan'));
     }
 
     /**
@@ -81,7 +86,11 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        $prodi = Prodi::get();
+        $jurusan = Jurusan::get();
+        $title="Edit Mahasiswa";
+        return view('admin.editMahasiswa', compact('title', 'mahasiswa','prodi','jurusan'));
     }
 
     /**
@@ -93,7 +102,20 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message=[
+            'required'=> 'Field tidak boleh kosong',
+        ];
+        $validasi=$request->validate([
+            'jurusan_id' => 'required',
+            'prodi_id' => 'required',
+            'skp_id' => 'nullable',
+            'nama' => 'required|unique:mahasiswas|max:255',
+            'nim'  => 'required|unique:mahasiswas',
+            'email' => 'required|email',
+            'password' => 'nullable',
+        ], $message);
+        Mahasiswa::where('id', $id)->update($validasi);
+        return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil diubah');
     }
 
     /**
