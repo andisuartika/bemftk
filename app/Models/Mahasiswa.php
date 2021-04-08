@@ -21,6 +21,10 @@ class Mahasiswa extends Model
         return $this->belongsTo(Jurusan::class);
     }
 
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
+    }
 
     // protected $table = 'mahasiswaftk';
     // protected $primaryKey = 'id';

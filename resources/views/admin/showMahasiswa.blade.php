@@ -8,21 +8,24 @@
       {{$title}}
     </h3>
     <div class=" py-2">
-        <a href="{{ route('mahasiswa.edit', $mahasiswa->id)}}">
-                 <button
-                  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-md active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
+          <a href="{{ route('mahasiswa.edit', $mahasiswa->id)}}">
+                 <button wire:click="getMhs({{$mahasiswa->id}})"
+                  class="px-3 py-2 mb-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-md active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
                 >
                   Edit Mahasiswa
                 </button>
-        </a>
-
-        <a href="{{ route('mahasiswa.destroy', $mahasiswa->id)}}">
-                 <button
-                  class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
+            </a>
+         <form action="{{ route('mahasiswa.destroy', $mahasiswa->id)}}" method="POST">
+                @csrf
+                @method('delete')
+                 <button type="submit"
+                  class="d-inline px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
+                  onclick="return confirm('Apakah Yakin?') || event.stopImmediatePropagation()" 
                 >
-                  Hapus Mahasiswa
+                  
+                  Hapus Mahasiswa  
                 </button>
-        </a>
+          </form>
       </div>
   </div>
   <div class="border-t border-gray-200">

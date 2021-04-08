@@ -20,12 +20,15 @@
                 <span>Hi, Wellcome Admin</span>
               </div>
             </div>
+            @include('alert')
             <!-- Tambah Kegiatan-->
             <div class="mb-8">
                 <button
                   class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                  <a href="{{route (('kegiatan.create'))}}">
                   Tambah Kegiatan
                   <span class="ml-2" aria-hidden="true">+</span>
+                  </a>
                 </button>
               </div>
 
@@ -48,46 +51,16 @@
                   </thead>
                   <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
+                  @foreach($kegiatan as $index => $k)
                     <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3 text-sm">1</td>
-                      <td class="px-4 py-3 text-sm">Absen Pagi Pemira</td>
-                      <td class="px-4 py-3 text-sm">Auditorium Undiksha</td>
-                      <td class="px-4 py-3 text-sm">24/03/2021</td>
-                      <td class="px-4 py-3 text-sm">09.00 - 10.00</td>
+                      <td class="px-4 py-3 text-sm">{{ $kegiatan->count() * ($kegiatan->currentPage() - 1) + $loop->iteration}}</td>
+                      <td class="px-4 py-3 text-sm">{{$k->nama}}</td>
+                      <td class="px-4 py-3 text-sm">{{$k->tempat}}</td>
+                      <td class="px-4 py-3 text-sm">{{$k->tanggal}}</td>
+                      <td class="px-4 py-3 text-sm">{{$k->time_start}} - {{$k->time_start}}</td>
                       <td class="px-4 py-3 text-sm">Detail</td>
                     </tr>
-                    <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3 text-sm">2</td>
-                      <td class="px-4 py-3 text-sm">Absen Pagi Pemira</td>
-                      <td class="px-4 py-3 text-sm">Auditorium Undiksha</td>
-                      <td class="px-4 py-3 text-sm">24/03/2021</td>
-                      <td class="px-4 py-3 text-sm">09.00 - 10.00</td>
-                      <td class="px-4 py-3 text-sm">Detail</td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3 text-sm">3</td>
-                      <td class="px-4 py-3 text-sm">Absen Pagi Pemira</td>
-                      <td class="px-4 py-3 text-sm">Auditorium Undiksha</td>
-                      <td class="px-4 py-3 text-sm">24/03/2021</td>
-                      <td class="px-4 py-3 text-sm">09.00 - 10.00</td>
-                      <td class="px-4 py-3 text-sm">Detail</td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3 text-sm">4</td>
-                      <td class="px-4 py-3 text-sm">Absen Pagi Pemira</td>
-                      <td class="px-4 py-3 text-sm">Auditorium Undiksha</td>
-                      <td class="px-4 py-3 text-sm">24/03/2021</td>
-                      <td class="px-4 py-3 text-sm">09.00 - 10.00</td>
-                      <td class="px-4 py-3 text-sm">Detail</td>
-                    </tr>
-                    <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3 text-sm">5</td>
-                      <td class="px-4 py-3 text-sm">Absen Pagi Pemira</td>
-                      <td class="px-4 py-3 text-sm">Auditorium Undiksha</td>
-                      <td class="px-4 py-3 text-sm">24/03/2021</td>
-                      <td class="px-4 py-3 text-sm">09.00 - 10.00</td>
-                      <td class="px-4 py-3 text-sm">Detail</td>
-                    </tr>
+                  @endforeach
                     
                   </tbody>
                 </table>
@@ -96,97 +69,10 @@
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
               >
                 <span class="flex items-center col-span-3">
-                  Menampilkan 5 Kegiatan Dari 5
+                  Menampilkan {{ $kegiatan->count() }} Dari {{ $kegiatan->total() }} Kegiatan
                 </span>
                 <span class="col-span-2"></span>
-                <!-- Pagination -->
-                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                  <nav aria-label="Table navigation">
-                    <ul class="inline-flex items-center">
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                          aria-label="Previous"
-                        >
-                          <svg
-                            aria-hidden="true"
-                            class="w-4 h-4 fill-current"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                              clip-rule="evenodd"
-                              fill-rule="evenodd"
-                            ></path>
-                          </svg>
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          1
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          2
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          3
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          4
-                        </button>
-                      </li>
-                      <li>
-                        <span class="px-3 py-1">...</span>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          8
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
-                        >
-                          9
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                          aria-label="Next"
-                        >
-                          <svg
-                            class="w-4 h-4 fill-current"
-                            aria-hidden="true"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd"
-                              fill-rule="evenodd"
-                            ></path>
-                          </svg>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                </span>
+                {{ $kegiatan->links('components.pagination')}}
               </div>
             </div>       
           </div>

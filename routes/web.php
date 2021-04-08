@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KegiatanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +34,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [AdminControl
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth:sanctum', 'verified']);
 
-Route::resource('/admin/mahasiswa', MahasiswaController::class);
+Route::resources([
+    '/admin/mahasiswa' => MahasiswaController::class,
+    '/admin/kegiatan' => KegiatanController::class,
+]);
 
-
-Route::get('/admin/kegiatan', [AdminController::class, 'kegiatan'])->name('kegiatan')->middleware(['auth:sanctum', 'verified']);
+// Route::get('/admin/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan')->middleware(['auth:sanctum', 'verified']);
 
 Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('validasi')->middleware(['auth:sanctum', 'verified']);

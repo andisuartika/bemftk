@@ -26,14 +26,17 @@
             @include('alert')
             <!-- Tambah Mahasiswa-->
             <div class="mb-8">
-              <a href="{{ route('mahasiswa.create')}}">
+            
                 <button
-                  class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  class="flex items-center justify-between px-4 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                 
                 >
-                  Tambah Mahasiswa
-                  <span class="ml-2" aria-hidden="true">+</span>
+                  <a href="{{route (('mahasiswa.create'))}}">
+                    Tambah Mahasiswa
+                    <span class="ml-2" aria-hidden="true">+</span>
+                  </a>
                 </button>
-              </a>
+                
               </div>
 
             <!-- New Table -->
@@ -57,11 +60,11 @@
                   >
                     @foreach($mahasiswa as $index => $mhs)
                     <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3 text-sm">{{ $mahasiswa->count() * ($mahasiswa->currentPage() - 1) + $loop->iteration }}</td>
+                      <td class="px-4 py-3 text-sm">{{ $mahasiswa->count() * ($mahasiswa->currentPage() - 1) + $loop->iteration}}</td>
                       <td class="px-4 py-3 text-md">{{$mhs->nama}}</td>
                       <td class="px-4 py-3 text-sm">{{ $mhs->jurusan()->get()->implode('nama')}}</td>
                       <td class="px-4 py-3 text-sm">{{ $mhs->prodi()->get()->implode('nama')}}</td>
-                      <td class="px-4 py-3 text-sm"><a href="{{ route('mahasiswa.show', $mhs->id)}}">Detail</a></td>
+                      <td class="px-4 py-3 text-sm"><a href="{{ route('mahasiswa.show', $mhs)}}" class="text-indigo-600 hover:text-indigo-900">Detail</a></td>
                     </tr>
                     @endforeach                 
                   </tbody>
@@ -75,7 +78,7 @@
                   Menampilkan {{ $mahasiswa->count() }} Dari {{ $mahasiswa->total() }} Mahasiswa
                 </span>
                 <span class="col-span-2"></span>
-                {{ $mahasiswa->links('component.pagination')}}
+                {{ $mahasiswa->links('components.pagination')}}
               </div>
             </div>       
           </div>

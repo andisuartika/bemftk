@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     @livewireStyles
-    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
 
@@ -18,15 +18,10 @@
       defer
     ></script>
     <script src="{{ asset('js/init-alpine.js') }}" defer></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-      defer
-    ></script>
     <script src="{{ asset('js/init-alpine.js') }}" defer></script>
+
+    <!-- sweetalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -49,12 +44,8 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                class="text-gray-800 inline-flex items-center w-full text-sm font-semibold  transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                 href="{{ route('admin') }}"
               >
                 <svg
@@ -77,6 +68,8 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
+            <x-sidebar>
+            </x-sidebar>
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="{{ route('mahasiswa.index')}}"
@@ -101,7 +94,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="{{ route('kegiatan') }}"
+                href="{{ route('kegiatan.index') }}"
               >
                 <svg
                   class="w-5 h-5"
@@ -237,7 +230,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:text-gray-100"
-                href="{{ route('kegiatan')}}"
+                href="{{ route('kegiatan.index')}}"
               >
                 <svg
                   class="w-5 h-5"

@@ -32,9 +32,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $prodi = Prodi::get();
         $jurusan = Jurusan::get();
+        $prodi = Prodi::get();
         $title="Tambah Mahasiswa";
+
         return view('admin.inputMahasiswa', compact('title','prodi','jurusan'));
     }
 
@@ -86,11 +87,12 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
+
         $mahasiswa = Mahasiswa::find($id);
-        $prodi = Prodi::get();
-        $jurusan = Jurusan::get();
+        $prodies = Prodi::get();
+        $jurusans = Jurusan::orderBy('nama')->get();
         $title="Edit Mahasiswa";
-        return view('admin.editMahasiswa', compact('title', 'mahasiswa','prodi','jurusan'));
+        return view('admin.inputMahasiswa', compact('title', 'mahasiswa','prodies','jurusans'));
     }
 
     /**
@@ -109,8 +111,8 @@ class MahasiswaController extends Controller
             'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'skp_id' => 'nullable',
-            'nama' => 'required|unique:mahasiswas|max:255',
-            'nim'  => 'required|unique:mahasiswas',
+            'nama' => 'required',
+            'nim'  => 'required',
             'email' => 'required|email',
             'password' => 'nullable',
         ], $message);
@@ -126,6 +128,7 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mahasiswa::where('id', $id)->delete();
+        return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil dihapus');
     }
 }
