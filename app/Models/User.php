@@ -24,8 +24,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'jurusan_id',
+        'prodi_id',
         'name',
+        'nim',
         'email',
+        'roles',
         'password',
     ];
 
@@ -58,4 +62,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
+    }
 }

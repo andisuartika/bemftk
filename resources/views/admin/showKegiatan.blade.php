@@ -1,11 +1,10 @@
 <x-Template-layout>
 
-<div class="container px-6 mx-auto grid">
-     
+<div class="container px-6 mx-auto grid">    
 <div class="mt-16 bg-white shadow overflow-hidden sm:rounded-lg">
-  <div class="px-4 py-5 sm:px-6">
+  <div class="px-4 sm:px-6">
     
-  <div class="flex justify-between flex-col flex-wrap mb-8 space-y-4 md:flex-row md:items-end md:space-x-4">
+    <div class="flex justify-between flex-col flex-wrap mb-8 space-y-4 md:flex-row md:items-end md:space-x-4">
       <div class="">
           <h2 class="text-lg leading-6 text-gray-900 font-semibold">
              {{$title}}
@@ -15,7 +14,7 @@
       <div class="flex">
           <!-- Edit -->
         <div class="px-3">
-        <a href="{{ route('mahasiswa.edit', $mahasiswa->id)}}">
+        <a href="{{ route('kegiatan.edit', $kegiatan->id)}}">
           <button
             class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
           >
@@ -39,7 +38,7 @@
 
         <!-- Hapus -->
         <div>
-        <form action="{{ route('mahasiswa.destroy', $mahasiswa->id)}}" method="POST">
+        <form action="{{ route('kegiatan.destroy', $kegiatan->id)}}" method="POST">
         @csrf
         @method('delete')
           <button type="submit"
@@ -65,52 +64,68 @@
       </div>
         
     </div>
-
+    
   <div class="border-t border-gray-200">
     <dl>
       <div class="bg-gray-50 px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
-          Nama
+          Nama Kegiatan
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        {{$mahasiswa->name}}
+        {{$kegiatan->nama}}
         </dd>
       </div>
       <div class="bg-white px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
-          NIM
+          Tempat
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-          {{$mahasiswa->nim}}
+          {{$kegiatan->tempat}}
         </dd>
       </div>
       <div class="bg-gray-50 px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
-          Jurusan
+          Tanggal
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        {{ $mahasiswa->jurusan()->get()->implode('nama')}}
+        {{ $kegiatan->tanggal}}
         </dd>
       </div>
-      <div class="bg-white px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <div class="px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
-          Program Studi
+          Mulai
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        {{ $mahasiswa->prodi()->get()->implode('nama')}}
+        {{ $kegiatan->time_start}}
         </dd>
       </div>
       <div class="bg-gray-50 px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt class="text-sm font-medium text-gray-500">
-          Email
+          Selesai
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        {{$mahasiswa->email}}
+        {{ $kegiatan->time_start}}
+        </dd>
+      </div>
+      <div class=" px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Keterangan
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        {{$kegiatan->keterangan}}
+        </dd>
+      </div>
+      <div class="bg-gray-50 px-10 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Point SKP
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        {{ $kegiatan->point_skp}}
         </dd>
       </div>
     
       <div class="px-10 py-5">
-        <a href="{{ route('mahasiswa.index')}}">
+        <a href="{{ route('kegiatan.index')}}">
                 <button
                   class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >

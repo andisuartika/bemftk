@@ -49,10 +49,10 @@
                       <div class="px-10 py-5 bg-white sm:p-6 dark:bg-gray-800">
                         <div class="grid grid-cols-6 gap-6">
                           <div class="col-span-6 sm:col-span-6">
-                            <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Nama</label>
-                            <input type="text" type="text" name="nama" id="nama" autocomplete="Nama" value="{{ (isset($mahasiswa)) ?$mahasiswa->nama : old('nama')}}"class="@error('nama') border-red-600 @enderror block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-lg" placeholder="Nama Mahasiswa">
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Nama</label>
+                            <input type="text" type="text" name="name" id="name" autocomplete="Nama" value="{{ (isset($mahasiswa)) ?$mahasiswa->name : old('name')}}"class="@error('name') border-red-600 @enderror block w-full text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded-lg" placeholder="Nama Mahasiswa">
                             <span class="text-xs text-red-600 dark:text-red-400">
-                              @error('nama') {{$message}} @enderror
+                              @error('name') {{$message}} @enderror
                            </span>
                           </div>                
 

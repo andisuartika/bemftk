@@ -11,6 +11,6 @@ class Jurusan extends Model
 
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class, 'jurusan_id');
+        return $this->hasMany(User::class, 'jurusan_id');
     }
 }

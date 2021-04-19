@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Mahasiswa\HomeController;
+use App\Http\Controllers\Mahasiswa\SkpController;
+use App\Http\Controllers\Mahasiswa\BiodataController;
+use App\Http\Controllers\Admin\MahasiswaController;
+use App\Http\Controllers\Admin\KegiatanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,13 +34,22 @@ Route::get('/', function () {
 // Login
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth:sanctum', 'verified']);
 
-Route::resources([
-    '/admin/mahasiswa' => MahasiswaController::class,
-    '/admin/kegiatan' => KegiatanController::class,
-]);
-
-// Route::get('/admin/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan')->middleware(['auth:sanctum', 'verified']);
-
-Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('validasi')->middleware(['auth:sanctum', 'verified']);
+ 
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'roles:admin'], function() {
+        Route::resources([
+            '/admin/mahasiswa' => MahasiswaController::class,
+            '/admin/kegiatan' => KegiatanController::class
+        ]);
+        Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin');
+        Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('validasi')->middleware(['auth:sanctum', 'verified']);
+    });
+   Route::group(['middleware' => 'roles:mahasiswa'], function() {
+       Route::resources([
+           '/mahasiswa/dashboard' => HomeController::class,
+           '/mahasiswa/pointskp' => SkpController::class,
+           '/mahasiswa/biodata' => BiodataController::class,
+        ]);
+   });
+});

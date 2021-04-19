@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use App\Models\Prodi;
+use App\Http\Controllers\Controller;
 use BaconQrCode\Renderer\Path\Path;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
+
 
 class MahasiswaController extends Controller
 {
@@ -15,13 +21,20 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $mahasiswa=Mahasiswa::all();
+        if (Gate::denies('admin')) {
+            abort(403);
+        }
+
+        if($request->has('search')){
+            $mahasiswa=User::where('name', 'LIKE', '%' .$request->search. '%')->latest()->paginate(5);
+        }else {
+            $mahasiswa=User::where('roles', '=','mahasiswa')->latest()->paginate(5);
+        }
         $title="Mahasiswa";
-        return view('admin.mahasiswa', [
-            'mahasiswa'=> Mahasiswa::latest()->paginate(5),
-        ], compact('title', 'mahasiswa')
+        return view('admin.mahasiswa', compact('title', 'mahasiswa')
     );
     }
 
@@ -47,6 +60,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+
         $message=[
             'required'=> 'Field tidak boleh kosong',
         ];
@@ -54,12 +68,23 @@ class MahasiswaController extends Controller
             'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'skp_id' => 'nullable',
-            'nama' => 'required|unique:mahasiswas|max:255',
-            'nim'  => 'required|unique:mahasiswas',
-            'email' => 'required|email',
+            'name' => 'required|unique:users|max:255',
+            'nim'  => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'nullable',
         ], $message);
-        Mahasiswa::create($validasi);
+
+
+        User::create([
+            'jurusan_id' => $request['jurusan_id'],
+            'prodi_id' => $request['prodi_id'],
+            'skp_id' => null,
+            'name' => $request['name'],
+            'nim'  => $request['nim'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['nim']),
+        ]);
+
         return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil ditambahkan');
         
     }
@@ -72,7 +97,7 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa = User::find($id);
         $prodi = Prodi::get();
         $jurusan = Jurusan::get();
         $title="Detail Mahasiswa";
@@ -87,8 +112,7 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-
-        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa = User::find($id);
         $prodies = Prodi::get();
         $jurusans = Jurusan::orderBy('nama')->get();
         $title="Edit Mahasiswa";
@@ -111,12 +135,12 @@ class MahasiswaController extends Controller
             'jurusan_id' => 'required',
             'prodi_id' => 'required',
             'skp_id' => 'nullable',
-            'nama' => 'required',
+            'name' => 'required',
             'nim'  => 'required',
             'email' => 'required|email',
             'password' => 'nullable',
         ], $message);
-        Mahasiswa::where('id', $id)->update($validasi);
+        User::where('id', $id)->update($validasi);
         return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil diubah');
     }
 
@@ -128,7 +152,7 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        Mahasiswa::where('id', $id)->delete();
+        User::where('id', $id)->delete();
         return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil dihapus');
     }
 }

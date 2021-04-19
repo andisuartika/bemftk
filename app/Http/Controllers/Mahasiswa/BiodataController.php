@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Mahasiswa;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Kegiatan;
+use Illuminate\Support\Facades\Auth;
 
-class KegiatanController extends Controller
+class BiodataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,7 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        $kegiatan=Kegiatan::all();
-        $title="Kegiatan";
-        return view('admin.kegiatan', [
-            'kegiatan'=> Kegiatan::latest()->paginate(5),
-        ], compact('title', 'kegiatan')
-    );
+        return view('mahasiswa.biodata');
     }
 
     /**
@@ -29,9 +25,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        $title="Tambah Kegiatan";
-
-        return view('admin.inputKegiatan', compact('title'));
+        //
     }
 
     /**
@@ -42,20 +36,7 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $message=[
-            'required'=> 'Field tidak boleh kosong',
-        ];
-        $validasi=$request->validate([
-            'point_skp' => 'required',
-            'nama' => 'required|unique:kegiatans',
-            'tempat' => 'nullable',
-            'tanggal' => 'required',
-            'time_start'  => 'required',
-            'time_end'  => 'required',
-            'keterangan' => 'required',
-        ], $message);
-        Kegiatan::create($validasi);
-        return redirect('admin/kegiatan')->with('succes', 'Data Kegiatan Berhasil ditambahkan');
+        //
     }
 
     /**

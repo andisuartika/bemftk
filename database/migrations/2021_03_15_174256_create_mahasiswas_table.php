@@ -22,8 +22,9 @@ class CreateMahasiswasTable extends Migration
             $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('profile_img');
-            $table->boolean('is_active');
+            $table->string('profile_img')->default('user.png');
+            $table->boolean('is_active')->default(TRUE);
+            $table->string('roles')->defualt('mahasiswa');
             $table->timestamps();
         });
     }
