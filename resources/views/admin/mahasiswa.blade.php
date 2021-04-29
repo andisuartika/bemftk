@@ -41,11 +41,10 @@
 
             <!-- New Table -->
             <div class="flex justify-between mb-2">
-            
               <h2 class="mb-2 dark:text-gray-200">Daftar Mahasiswa</h2>
               <div>
                 <!-- Search input -->
-                <form method="GET" action="{{ route('mahasiswa.index')}}">
+                {{-- <form method="GET" action="{{ route('mahasiswa.index')}}">
                 <div class="flex justify-center flex-1">
                   <div
                     class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
@@ -73,49 +72,10 @@
                     />
                   </div>
                 </div>
-                </form>
+                </form> --}}
               </div>
             </div>
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-              <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
-                  <thead>
-                    <tr
-                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-                    >
-                      <th class="px-4 py-3">#</th>
-                      <th class="px-4 py-3">Nama</th>
-                      <th class="px-4 py-3">Jurusan</th>
-                      <th class="px-4 py-3">Prodi</th>
-                      <th class="px-4 py-3">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                  >
-                    @foreach($mahasiswa as $index => $mhs)
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3 text-sm">{{ $mahasiswa->firstitem() + $index}}</td>
-                      <td class="px-4 py-3 text-md">{{$mhs->name}}</td>
-                      <td class="px-4 py-3 text-sm">{{ $mhs->jurusan()->get()->implode('nama')}}</td>
-                      <td class="px-4 py-3 text-sm">{{ $mhs->prodi()->get()->implode('nama')}}</td>
-                      <td class="px-4 py-3 text-sm"><a href="{{ route('mahasiswa.show', $mhs)}}" class="text-indigo-600 hover:text-indigo-900">Detail</a></td>
-                    </tr>
-                    @endforeach                 
-                  </tbody>
-                </table>
-                
-              </div>
-              <div
-                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-              >
-                <span class="flex items-center col-span-3">
-                  Menampilkan {{ $mahasiswa->count() }} Dari {{ $mahasiswa->total() }} Mahasiswa
-                </span>
-                <span class="col-span-2"></span>
-                {{ $mahasiswa->links('components.pagination')}}
-              </div>
-            </div>       
+            @livewire('daftar-mahasiswa')    
           </div>
 
 </x-Template-layout>

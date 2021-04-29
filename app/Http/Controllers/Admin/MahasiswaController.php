@@ -34,6 +34,7 @@ class MahasiswaController extends Controller
             $mahasiswa=User::where('roles', '=','mahasiswa')->latest()->paginate(5);
         }
         $title="Mahasiswa";
+
         return view('admin.mahasiswa', compact('title', 'mahasiswa')
     );
     }
