@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-use App\Models\Jurusan;
-use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Models\Prodi;
-use App\Http\Controllers\Controller;
-use BaconQrCode\Renderer\Path\Path;
+use App\Models\Jurusan;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
+use App\Exports\MahasiswaExport;
+use App\Imports\MahasiswaImport;
+use BaconQrCode\Renderer\Path\Path;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class MahasiswaController extends Controller
@@ -37,6 +40,24 @@ class MahasiswaController extends Controller
 
         return view('admin.mahasiswa', compact('title', 'mahasiswa')
     );
+    }
+
+    // ExportExcel
+    public function MahasiswaExport(){
+        return Excel::download(new MahasiswaExport,'mahasiswa.xlsx');
+    }
+
+    // ImportExcel
+    public function MahasiswaImport(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:csv,xlx,xls,xlsx,pdf|max:2048'
+        ]);
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataMahasiswa', $namaFile);
+
+        Excel::import(new MahasiswaImport, public_path('/DataMahasiswa/'.$namaFile));
+        return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil diimport');
     }
 
     /**
@@ -154,6 +175,6 @@ class MahasiswaController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
-        return redirect('admin/mahasiswa')->with('succes', 'Data Mahasiswa Berhasil dihapus');
+        return redirect('admin/mahasiswa')->with('deleted', 'Data Mahasiswa Berhasil dihapus');
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pointskp;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kegiatan extends Model
 {
@@ -21,4 +22,10 @@ class Kegiatan extends Model
     protected $fillable =[
         'point_skp','nama','tempat','tanggal','time_start','time_end','keterangan'
     ];
+
+
+    public function absensi()
+    {
+        return $this->belongsTo(Absensi::class);
+    }
 }

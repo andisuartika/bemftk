@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Validasi;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -76,5 +77,14 @@ class User extends Authenticatable
     public function kegiatan()
     {
         return $this->hasMany(Kegiatan::class);
+    }
+
+    public function Pointskp()
+    {
+        return $this->hasMany(Pointskp::class);
+    }
+
+    public function Validasi(){
+        return $this->hasMany(Validasi::class, 'nim');
     }
 }

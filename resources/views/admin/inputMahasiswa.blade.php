@@ -68,7 +68,7 @@
                             @if(!isset($mahasiswa))
                               @livewire('select')
                             @else 
-                                  <div class="block col-span-6 sm:col-span-3">
+                                <div class="block col-span-6 sm:col-span-3">
                                   <label for="jurusan_id" class="block text-sm font-medium text-gray-700 dark:text-gray-400">
                                     Jurusan
                                   </label>

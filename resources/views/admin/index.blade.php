@@ -1,5 +1,5 @@
 @php
-    $bulan = date('F');
+    $bulan = date('M');
 @endphp
 <x-template-layout>
     <div class="container px-6 mx-auto grid">
@@ -132,7 +132,7 @@
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                   >
-                    10
+                    {{ $validasi }}
                   </p>
                 </div>
               </div>
@@ -141,7 +141,7 @@
             <!-- New Table -->
             <h2 class="mb-2 dark:text-gray-200">Kegiatan Yang Sedang Berlangsung Bulan <b>{{ $bulan }}</b></h2>
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
-              @livewire('kegiatan-berlangsung')
+              @livewire('admin.kegiatan-berlangsung')
             </div>
 
             

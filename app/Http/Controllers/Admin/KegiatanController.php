@@ -107,7 +107,7 @@ class KegiatanController extends Controller
         ];
         $validasi=$request->validate([
             'point_skp' => 'required',
-            'nama' => 'required|unique:kegiatans',
+            'nama' => 'required',
             'tempat' => 'nullable',
             'tanggal' => 'required',
             'time_start'  => 'required',

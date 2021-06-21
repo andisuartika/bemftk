@@ -42,8 +42,8 @@
         @csrf
         @method('delete')
           <button type="submit"
-            class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
-            onclick="return confirm('Apakah Yakin?') || event.stopImmediatePropagation()" 
+            class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red button delete-confirm"
+            onclick="confirmDelete('delete')" 
           >
             <span>Hapus</span>
             <svg
@@ -140,3 +140,23 @@
 </div>
 
 </x-Template-layout>
+
+<script>
+  $('.delete-confirm').on('click', function (event) {
+      event.preventDefault();
+      const url = $(this).attr('href');
+      swal({
+          title: 'Yakin Hapus Kegiatan?',
+          text: 'Data Kegiatan akan dihapus permanen!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+      }).then((willDelete) => {
+          if (willDelete) {
+            $(this).closest('form').submit();
+          } else {
+            swal("Data tidak dihapus!");
+          }
+      });
+  });
+  </script>

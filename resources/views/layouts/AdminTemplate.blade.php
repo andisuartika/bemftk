@@ -13,6 +13,8 @@
     
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
+
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
@@ -22,6 +24,11 @@
 
     <!-- sweetalert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- jQuery --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Select2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -116,7 +123,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="{{ route('validasi')}}"
+                href="{{ route('validasi.index')}}"
               >
                 <svg
                   class="w-5 h-5"
@@ -135,13 +142,11 @@
                 <span class="ml-4">Validasi</span>
               </a>
             </li>
-          <div class="px-6 my-6">
-            <button
-              class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-            >
+          <div class="px-12 my-6">
+            <a href="{{ route('absensi.index') }}" class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple shadow-lg">
               Tambah Absensi
-              <span class="ml-2" aria-hidden="true">+</span>
-            </button>
+              <span aria-hidden="true">+</span>
+            </a>
           </div>
         </div>
       </aside>
@@ -252,7 +257,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="{{ route('validasi')}}"
+                href="{{ route('validasi.index')}}"
               >
                 <svg
                   class="w-5 h-5"
@@ -481,7 +486,6 @@
       </div>
     </div>
     @stack('modals')
-
     @livewireScripts
   </body>
 </html>

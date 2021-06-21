@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Admin;
 
 use App\Models\Kegiatan;
 use Livewire\Component;
@@ -11,7 +11,9 @@ class KegiatanBerlangsung extends Component
 
     public function render()
     {
-        $this->kegiatan = Kegiatan::whereMonth('tanggal', '04')->get();
+        $bulan = date('m');
+
+        $this->kegiatan = Kegiatan::whereMonth('tanggal', $bulan)->get();
 
         return view('livewire.admin.kegiatan-berlangsung');
     }

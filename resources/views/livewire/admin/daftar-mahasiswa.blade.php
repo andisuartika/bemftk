@@ -1,13 +1,41 @@
 <div>
     <div class="row flex justify-between mb-2">
         <div class="col">
-        <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232"></svg>
-            <select wire:model="paginate" name="paginate" id="paginate" class="border border-gray-300 rounded-md text-gray-600 h-9 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 focus:placeholder-gray-500 dark:border-gray-800 dark:text-gray-600">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-            </select>
+          <div class="flex sm:flex-row flex-col">
+            <div class="flex flex-row mb-1 sm:mb-0">
+                <div class="relative">
+                    <select
+                        wire:model="paginate" name="paginate"
+                        class="border border-gray-300 rounded-l text-gray-600 h-9 pl-5 pr-10 bg-gray-100 hover:border-gray-400 focus:outline-none appearance-none dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 focus:placeholder-gray-500 dark:border-gray-800 dark:text-gray-600">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                <div class="relative">
+                    <select
+                        name="jurusan_id" wire:model='jurusan'
+                        class="border border-gray-300 text-gray-600 h-9 pl-5 pr-10 bg-gray-100 hover:border-gray-400 focus:outline-none appearance-none dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 focus:placeholder-gray-500 dark:border-gray-800 dark:text-gray-600">
+                        <option value="">All Jurusan</option>
+                        @foreach ($jurusans as $jrs)
+                                <option value="{{ $jrs->id }}">{{ $jrs->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="relative">
+                    <select
+                        name="prodi_id" wire:model="prodi"
+                        class="border border-gray-300 rounded-r text-gray-600 h-9 pl-5 pr-10 bg-gray-100 hover:border-gray-400 focus:outline-none appearance-none dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 focus:placeholder-gray-500 dark:border-gray-800 dark:text-gray-600">
+                        <option value="">All Program Studi</option>
+                        @foreach ($prodies as $p)
+                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div> 
         </div>
+          
         <div class="col">
             <!-- Search input -->
                 <div class="flex justify-center flex-1">
@@ -77,7 +105,7 @@
             Menampilkan {{ $mahasiswa->count() }} Dari {{ $mahasiswa->total() }} Mahasiswa
           </span>
           <span class="col-span-2"></span>
-          {{ $mahasiswa->links('components.pagination')}}
+          {{ $mahasiswa->links('components.livewire-pagination')}}
         </div>
         </div>
         </div>

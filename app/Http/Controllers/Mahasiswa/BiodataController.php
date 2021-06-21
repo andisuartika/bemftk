@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Mahasiswa;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Prodi;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class BiodataController extends Controller
@@ -15,7 +18,11 @@ class BiodataController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa.biodata');
+
+        $mahasiswa = Auth::user();
+        $jurusan = Jurusan::get();
+        $prodi = Prodi::get();
+        return view('mahasiswa.biodata',compact('mahasiswa','jurusan','prodi'));
     }
 
     /**
@@ -47,7 +54,7 @@ class BiodataController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -58,7 +65,11 @@ class BiodataController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = Auth::user();
+        $edit ='biodataEdit';
+        $jurusan = Jurusan::get();
+        $prodi = Prodi::get();
+        return view('mahasiswa.biodata',compact('mahasiswa','edit','jurusan','prodi'));
     }
 
     /**
@@ -70,7 +81,20 @@ class BiodataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message=[
+            'required'=> 'Field tidak boleh kosong',
+        ];
+        $validasi=$request->validate([
+            'jurusan_id' => 'required',
+            'prodi_id' => 'required',
+            'skp_id' => 'nullable',
+            'name' => 'required',
+            'nim'  => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable',
+        ], $message);
+        User::where('id', $id)->update($validasi);
+        return redirect('mahasiswa/biodata')->with('succes', 'Biodata Berhasil diubah');
     }
 
     /**
